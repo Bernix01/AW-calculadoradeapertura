@@ -1,89 +1,304 @@
 // bower:scss
 // endbower
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-body {
-  padding: 0;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
+@import "compass/reset";
+@import "compass/css3";
+@import "mixins";
+@import "fonts/fonts";
+$Android: 800px;
+$iPad: 768px;
 
 /* Custom page footer */
+
 .footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+    padding-top: 19px;
+    color: #fefefe;
+    border-top: 1px solid #e5e5e5;
 }
-
 .container-narrow > hr {
-  margin: 30px 0;
+    margin: 30px 0;
+}
+body,
+.dial {
+    background-color: #80c5fe;
+    overflow: hidden;
+    color: white;
+    max-width: 800px;
+}
+.gauge {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    top: 30px;
+    left: 50%;
+    margin-left: -250px;
+    border-radius: 100%;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -webkit-transform: rotate(0deg);
+}
+.meter {
+    margin: 0;
+    padding: 0;
+}
+.meter > li {
+    width: 250px;
+    height: 250px;
+    list-style-type: none;
+    position: absolute;
+    border-top-left-radius: 250px;
+    border-top-right-radius: 0px;
+    transform-origin: 100% 100%;
+    ;
+    -webkit-transform-origin: 100% 100%;
+    ;
+    -ms-transform-origin: 100% 100%;
+    ;
+    transition-property: -webkit-transform;
+    pointer-events: none;
+}
+.meter .low {
+    transform: rotate(0deg);
+    /* W3C */
+    -webkit-transform: rotate(0deg);
+    /* Safari & Chrome */
+    -moz-transform: rotate(0deg);
+    /* Firefox */
+    -ms-transform: rotate(0deg);
+    /* Internet Explorer */
+    -o-transform: rotate(0deg);
+    /* Opera */
+    z-index: 8;
+    background-color: #fff;
+}
+.meter .normal {
+    transform: rotate(47deg);
+    /* W3C */
+    -webkit-transform: rotate(47deg);
+    /* Safari & Chrome */
+    -moz-transform: rotate(47deg);
+    /* Firefox */
+    -ms-transform: rotate(47deg);
+    /* Internet Explorer */
+    -o-transform: rotate(47deg);
+    /* Opera */
+    z-index: 7;
+    background-color: #0096ff;
+}
+.meter .high {
+    transform: rotate(90deg);
+    /* W3C */
+    -webkit-transform: rotate(90deg);
+    /* Safari & Chrome */
+    -moz-transform: rotate(90deg);
+    /* Firefox */
+    -ms-transform: rotate(90deg);
+    /* Internet Explorer */
+    -o-transform: rotate(90deg);
+    /* Opera */
+    z-index: 6;
+    background-color: #ff2400;
+}
+.dial,
+.dial .inner {
+    width: 470px;
+    height: 470px;
+    position: relative;
+    top: 10px;
+    left: 5px;
+    border-radius: 100%;
+    border-color: purple;
+    z-index: 10;
+    transition-property: -webkit-transform;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transform: rotate(0deg);
+    /* W3C */
+    -webkit-transform: rotate(0deg);
+    /* Safari & Chrome */
+    -moz-transform: rotate(0deg);
+    /* Firefox */
+    -ms-transform: rotate(0deg);
+    /* Internet Explorer */
+    -o-transform: rotate(0deg);
+    /* Opera */
+}
+.dial .arrow {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 214px;
+    left: 24px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 32px solid #FFFFFF;
+    -webkit-transform: rotate(-88deg);
+    /* Safari & Chrome */
+    -moz-transform: rotate(88deg);
+    /* Firefox */
+    -ms-transform: rotate(88deg);
+    /* Internet Explorer */
+    -o-transform: rotate(88deg);
+    /* Opera */
+}
+.gauge .value {
+    font-family: 'Josefin Slab', serif;
+    font-size: 50px;
+    color: #ffffff;
+    position: absolute;
+    top: 142px;
+    left: 45%;
+    z-index: 11;
+}
+ng-hide-add {
+    animation: 0.5s lightSpeedOut ease;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+/* when showing the picture */
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+.ng-hide-remove {
+    animation: 0.5s flipInX ease;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
 
-  p + h4 {
-    margin-top: 28px;
-  }
+
+/* flip in */
+
+@keyframes flipInX {
+    0% {
+        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+        transition-timing-function: ease-in;
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        transition-timing-function: ease-in;
+        transition-timing-function: ease-in;
+    }
+    60% {
+        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        opacity: 1;
+    }
+    80% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+    100% {
+        transform: perspective(400px);
+        transform: perspective(400px);
+        transform: perspective(400px);
+    }
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+/* light speed out */
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+@keyframes lightSpeedOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        opacity: 0;
+    }
+}
+@keyframes lightSpeedOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        opacity: 0;
+    }
+}
+.container {
+    width: 640px;
+    height: 960px;
+    box-sizing: border-box;
+    padding: 25px 50px 45px 60px;
+    background: url(../images/fondo_iphone.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    @include breakpoint($iPad) {
+        width: $iPad;
+        height: 1024px;
+        background: url(../images/fondo.jpg);
+        background-size: contain;
+        padding: 35px 80px;
+    }
+    @include breakpoint($Android) {
+        width: $Android;
+        background: url(../images/fondo_android.jpg);
+        padding: 65px 65px;
+        height: 1280px;
+    }
+}
+.qs {
+    -webkit-transform: translateY(-150px);
+    -moz-transform: translateY(-150px);
+    -ms-transform: translateY(-150px);
+    transform: translateY(-150px);
+    height: 550px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding-right: 10px;
+    @include breakpoint($iPad) {
+        overflow-y: hidden;
+    }
+    h1 {
+        font-family: 'MerriweatherSans-ExtraBold';
+        font-size: 26px;
+        line-height: 1.2;
+        @include breakpoint($Android) {
+            font-size: 32px;
+        }
+    }
+    .opts {
+        margin-top: 25px;
+        font-size: 25px;
+        li {
+            margin-top: 20px;
+            line-height: 1.2;
+            font-family: 'MerriweatherSans-Italic';
+            &:active {
+                font-weight: bold;
+            }
+        }
+    }
+    img {
+        width: 200px;
+        float: right;
+        -webkit-transform: translateY(-150px);
+        -moz-transform: translateY(-150px);
+        -ms-transform: translateY(-150px);
+        transform: translateY(-150px);
+        @include breakpoint($iPad) {
+            -webkit-transform: translateY(-125px);
+            -moz-transform: translateY(-125px);
+            -ms-transform: translateY(-125px);
+            transform: translateY(-125px);
+            width: 300px;
+            margin-right: 20px;
+        }
+    }
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
 }

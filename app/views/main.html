@@ -1,23 +1,32 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+    <div class="gauge">
+        <ul class="meter">
+            <li class="low"></li>
+            <li class="normal"></li>
+            <li class="high"></li>
+        </ul>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+        <div class="dial">
+            <div class="inner" ng-style="{ 'transform': 'rotate(' + (main.prog * 177.5) / 100 + 'deg)', '-ms-transform': 'rotate(' + (main.prog * 177.5) / 100 + 'deg)', '-webkit-transform': 'rotate(' + (main.prog * 177.5) / 100 + 'deg)','-o-transform': 'rotate(' + (main.prog * 177.5) / 100 + 'deg)' }">
+                <div class="arrow">
+                </div>
+            </div>
+        </div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+        <div class="value">
+            {{main.prog+"%"}}
+        </div>
+
+    </div>
+
+    <br />
+
+    <div>
+        <div class="qs" ng-repeat="(qi,q) in main.qs.questions" ng-show="main.current===qi">
+        <h1>{{q.q}}</h1>
+            <ul class="opts">
+                <li ng-repeat="opt in q.opts" ng-click="main.proc(opt)">{{opt.opt}}</li>
+            </ul>
+            <img ng-show="q.img" ng-src="{{q.img}}" />
+        </div>
+    </div>
